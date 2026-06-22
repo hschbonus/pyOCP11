@@ -2,6 +2,11 @@ bin
 include
 lib
 .Python
-tests/
 .envrc
 __pycache__
+_cours
+.claude
+mission
+claude.md
+backlog.md
+.mcp*
