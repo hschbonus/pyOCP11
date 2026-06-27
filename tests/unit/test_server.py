@@ -20,3 +20,12 @@ def test_should_not_book_more_than_12_places(client):
                                                     'places': 13})
     data = response.data.decode()
     assert 'Great-booking complete!' not in data
+
+
+# B4 Test si l'app permet de réserver des places d'une compétition passée
+def test_should_not_book_past_competition(client):
+    response = client.post('/purchasePlaces', data={'competition': "Spring Festival",
+                                                    'club': "Simply Lift",
+                                                    'places': 5})
+    data = response.data.decode()
+    assert 'Great-booking complete!' not in data
