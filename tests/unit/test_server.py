@@ -50,3 +50,11 @@ def test_should_not_book_more_than_available_places(client):
                                                     'places': 7})
     data = response.data.decode()
     assert 'Great-booking complete!' not in data
+
+
+# Phase 2: Test si la route publique du tableau de points fonctionne correctement
+def test_should_return_points_board(client):
+    response = client.get('/pointsBoard')
+    assert response.status_code == 200
+    data = response.data.decode()
+    assert any(club['name'] in data for club in server.clubs)

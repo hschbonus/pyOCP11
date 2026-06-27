@@ -1,0 +1,22 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GUDLFT Points Board</title>
+</head>
+
+<body>
+    <h1>Welcome to the GUDLFT Points Board</h1>
+
+    <ul>
+        {% for club in clubs%}
+        <li>
+            {{club['name']}}<br />
+            Number of Points: {{club['points']}}
+        </li>
+        <hr />
+        {% endfor %}
+    </ul>
+
+</body>
+</html>
