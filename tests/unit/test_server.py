@@ -1,3 +1,6 @@
+import server
+
+
 # B1 Test si l'app crash pas avec un mauvais email
 def test_should_status_code_not_500(client):
     response = client.post('/showSummary', data={'email': 'test@example.com'})
@@ -29,3 +32,12 @@ def test_should_not_book_past_competition(client):
                                                     'places': 5})
     data = response.data.decode()
     assert 'Great-booking complete!' not in data
+
+
+# B5 Test si l'app met à jour les points du club après réservation
+def test_should_update_club_points_after_booking(client):
+    theorical_points = int(server.clubs[0]['points']) - 5
+    client.post('/purchasePlaces', data={'competition': "Winter Classic",
+                                         'club': "Simply Lift",
+                                         'places': 5})
+    assert int(server.clubs[0]['points']) == theorical_points
