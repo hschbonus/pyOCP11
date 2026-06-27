@@ -41,3 +41,12 @@ def test_should_update_club_points_after_booking(client):
                                          'club': "Simply Lift",
                                          'places': 5})
     assert int(server.clubs[0]['points']) == theorical_points
+
+
+# B6 Test si l'app ne permet pas de réserver plus de places que disponible dans la compétition
+def test_should_not_book_more_than_available_places(client):
+    response = client.post('/purchasePlaces', data={'competition': "Winter Classic",
+                                                    'club': "She Lifts",
+                                                    'places': 7})
+    data = response.data.decode()
+    assert 'Great-booking complete!' not in data
