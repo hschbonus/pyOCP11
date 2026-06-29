@@ -10,3 +10,5 @@ mission
 claude.md
 backlog.md
 .mcp*
+.coverage
+livrables/

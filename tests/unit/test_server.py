@@ -58,3 +58,18 @@ def test_should_return_points_board(client):
     assert response.status_code == 200
     data = response.data.decode()
     assert any(club['name'] in data for club in server.clubs)
+
+
+# Test si redirection vers la page liste compétitions après login réussie
+def test_should_redirect_to_welcome_after_login(client):
+    response = client.post('/showSummary', data={'email': 'john@simplylift.co'})
+    data = response.data.decode()
+    assert response.status_code == 200
+    assert 'Welcome' in data
+
+
+# Test si redirection vers la page d'accueil après logout réussie
+def test_should_redirect_to_index_after_logout(client):
+    response = client.get('/logout')
+    assert response.status_code == 302
+    assert response.location == "/"
